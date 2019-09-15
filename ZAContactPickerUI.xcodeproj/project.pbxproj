@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		19D53719473741349985369A /* libPods-ZAContactPickerUI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 809335D2E118D3824C1E23A3 /* libPods-ZAContactPickerUI.a */; };
+		531A7C47232E67A60016D4F5 /* ContactModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 531A7C46232E67A60016D4F5 /* ContactModel.m */; };
+		531A7C4A232E67CF0016D4F5 /* SectionLabelViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 531A7C49232E67CF0016D4F5 /* SectionLabelViewCell.m */; };
+		531A7C4D232E6D270016D4F5 /* SectionLabelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 531A7C4C232E6D270016D4F5 /* SectionLabelController.m */; };
+		53BAF73A232D57AB00BAC6DA /* SectionLabelModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 53BAF739232D57AB00BAC6DA /* SectionLabelModel.m */; };
 		C2FE794C232B85190016834A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C2FE794B232B85190016834A /* AppDelegate.m */; };
 		C2FE794F232B85190016834A /* ContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2FE794E232B85190016834A /* ContactViewController.m */; };
 		C2FE7952232B85190016834A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C2FE7950232B85190016834A /* Main.storyboard */; };
@@ -24,7 +28,6 @@
 		C2FE7989232B90EE0016834A /* SearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = C2FE7988232B90EE0016834A /* SearchBar.m */; };
 		C2FE7992232BA25F0016834A /* ABAddressBookGetter.m in Sources */ = {isa = PBXBuildFile; fileRef = C2FE7990232BA25F0016834A /* ABAddressBookGetter.m */; };
 		C2FE7995232BA27C0016834A /* CNContactGetter.m in Sources */ = {isa = PBXBuildFile; fileRef = C2FE7993232BA27C0016834A /* CNContactGetter.m */; };
-		C2FE799F232BA2A40016834A /* ContactFacade.m in Sources */ = {isa = PBXBuildFile; fileRef = C2FE7997232BA2A30016834A /* ContactFacade.m */; };
 		C2FE79A0232BA2A40016834A /* ContactUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = C2FE7998232BA2A40016834A /* ContactUtility.m */; };
 		C2FE79A1232BA2A40016834A /* ContactBusiness.m in Sources */ = {isa = PBXBuildFile; fileRef = C2FE7999232BA2A40016834A /* ContactBusiness.m */; };
 		C2FE79A2232BA2A40016834A /* ContactWithStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = C2FE799A232BA2A40016834A /* ContactWithStatus.m */; };
@@ -48,6 +51,14 @@
 /* Begin PBXFileReference section */
 		0E4B1B3C90F493CF8B03A8AA /* Pods-ZAContactPickerUI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZAContactPickerUI.release.xcconfig"; path = "Target Support Files/Pods-ZAContactPickerUI/Pods-ZAContactPickerUI.release.xcconfig"; sourceTree = "<group>"; };
 		364E5B8DF73956FDEF0C868D /* Pods-ZAContactPickerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZAContactPickerUITests.release.xcconfig"; path = "Target Support Files/Pods-ZAContactPickerUITests/Pods-ZAContactPickerUITests.release.xcconfig"; sourceTree = "<group>"; };
+		531A7C45232E67A60016D4F5 /* ContactModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContactModel.h; sourceTree = "<group>"; };
+		531A7C46232E67A60016D4F5 /* ContactModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContactModel.m; sourceTree = "<group>"; };
+		531A7C48232E67CF0016D4F5 /* SectionLabelViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SectionLabelViewCell.h; sourceTree = "<group>"; };
+		531A7C49232E67CF0016D4F5 /* SectionLabelViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SectionLabelViewCell.m; sourceTree = "<group>"; };
+		531A7C4B232E6D270016D4F5 /* SectionLabelController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SectionLabelController.h; sourceTree = "<group>"; };
+		531A7C4C232E6D270016D4F5 /* SectionLabelController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SectionLabelController.m; sourceTree = "<group>"; };
+		53BAF738232D57AB00BAC6DA /* SectionLabelModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SectionLabelModel.h; sourceTree = "<group>"; };
+		53BAF739232D57AB00BAC6DA /* SectionLabelModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SectionLabelModel.m; sourceTree = "<group>"; };
 		6B9CC25D797E1A1F9B238198 /* libPods-ZAContactPickerUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ZAContactPickerUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		809335D2E118D3824C1E23A3 /* libPods-ZAContactPickerUI.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ZAContactPickerUI.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8ED15E46BEE201343F30B1DD /* Pods-ZAContactPickerUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZAContactPickerUI.debug.xcconfig"; path = "Target Support Files/Pods-ZAContactPickerUI/Pods-ZAContactPickerUI.debug.xcconfig"; sourceTree = "<group>"; };
@@ -84,11 +95,9 @@
 		C2FE7993232BA27C0016834A /* CNContactGetter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNContactGetter.m; sourceTree = "<group>"; };
 		C2FE7994232BA27C0016834A /* CNContactGetter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNContactGetter.h; sourceTree = "<group>"; };
 		C2FE7996232BA2A30016834A /* ContactWithStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactWithStatus.h; sourceTree = "<group>"; };
-		C2FE7997232BA2A30016834A /* ContactFacade.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactFacade.m; sourceTree = "<group>"; };
 		C2FE7998232BA2A40016834A /* ContactUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactUtility.m; sourceTree = "<group>"; };
 		C2FE7999232BA2A40016834A /* ContactBusiness.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactBusiness.m; sourceTree = "<group>"; };
 		C2FE799A232BA2A40016834A /* ContactWithStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactWithStatus.m; sourceTree = "<group>"; };
-		C2FE799B232BA2A40016834A /* ContactFacade.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactFacade.h; sourceTree = "<group>"; };
 		C2FE799C232BA2A40016834A /* StatusApplied.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusApplied.h; sourceTree = "<group>"; };
 		C2FE799D232BA2A40016834A /* ContactUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactUtility.h; sourceTree = "<group>"; };
 		C2FE799E232BA2A40016834A /* ContactBusiness.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactBusiness.h; sourceTree = "<group>"; };
@@ -202,6 +211,8 @@
 				C2FE7975232B88040016834A /* SearchContactController.m */,
 				C2FE7977232B882C0016834A /* ContactController.h */,
 				C2FE7978232B882C0016834A /* ContactController.m */,
+				531A7C4B232E6D270016D4F5 /* SectionLabelController.h */,
+				531A7C4C232E6D270016D4F5 /* SectionLabelController.m */,
 			);
 			path = SectionController;
 			sourceTree = "<group>";
@@ -213,6 +224,10 @@
 				C2FE7985232B90DE0016834A /* SelectedContacts.m */,
 				C2FE7987232B90EE0016834A /* SearchBar.h */,
 				C2FE7988232B90EE0016834A /* SearchBar.m */,
+				53BAF738232D57AB00BAC6DA /* SectionLabelModel.h */,
+				53BAF739232D57AB00BAC6DA /* SectionLabelModel.m */,
+				531A7C45232E67A60016D4F5 /* ContactModel.h */,
+				531A7C46232E67A60016D4F5 /* ContactModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -222,10 +237,12 @@
 			children = (
 				C2FE797B232B8E0D0016834A /* SelectedViewCell.h */,
 				C2FE797E232B8E1B0016834A /* SearchViewCell.h */,
-				C2FE797C232B8E0D0016834A /* SelectedViewCell.m */,
 				C2FE797F232B8E1B0016834A /* SearchViewCell.m */,
+				C2FE797C232B8E0D0016834A /* SelectedViewCell.m */,
 				C2FE79AF232BA7470016834A /* ContactViewCell.h */,
 				C2FE79B0232BA7470016834A /* ContactViewCell.m */,
+				531A7C48232E67CF0016D4F5 /* SectionLabelViewCell.h */,
+				531A7C49232E67CF0016D4F5 /* SectionLabelViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -235,8 +252,6 @@
 			children = (
 				C2FE799E232BA2A40016834A /* ContactBusiness.h */,
 				C2FE7999232BA2A40016834A /* ContactBusiness.m */,
-				C2FE799B232BA2A40016834A /* ContactFacade.h */,
-				C2FE7997232BA2A30016834A /* ContactFacade.m */,
 				C2FE799D232BA2A40016834A /* ContactUtility.h */,
 				C2FE7998232BA2A40016834A /* ContactUtility.m */,
 				C2FE7996232BA2A30016834A /* ContactWithStatus.h */,
@@ -441,7 +456,6 @@
 			files = (
 				C2FE79A1232BA2A40016834A /* ContactBusiness.m in Sources */,
 				C2FE79AE232BA2DF0016834A /* MutableContactList.m in Sources */,
-				C2FE799F232BA2A40016834A /* ContactFacade.m in Sources */,
 				C2FE7995232BA27C0016834A /* CNContactGetter.m in Sources */,
 				C2FE7976232B88040016834A /* SearchContactController.m in Sources */,
 				C2FE794F232B85190016834A /* ContactViewController.m in Sources */,
@@ -449,14 +463,18 @@
 				C2FE795A232B851A0016834A /* main.m in Sources */,
 				C2FE7979232B882C0016834A /* ContactController.m in Sources */,
 				C2FE7989232B90EE0016834A /* SearchBar.m in Sources */,
+				531A7C47232E67A60016D4F5 /* ContactModel.m in Sources */,
+				531A7C4D232E6D270016D4F5 /* SectionLabelController.m in Sources */,
 				C2FE79A0232BA2A40016834A /* ContactUtility.m in Sources */,
 				C2FE79B1232BA7470016834A /* ContactViewCell.m in Sources */,
 				C2FE7980232B8E1B0016834A /* SearchViewCell.m in Sources */,
 				C2FE79AD232BA2DF0016834A /* ContactInstance.m in Sources */,
 				C2FE79A2232BA2A40016834A /* ContactWithStatus.m in Sources */,
 				C2FE797D232B8E0D0016834A /* SelectedViewCell.m in Sources */,
+				53BAF73A232D57AB00BAC6DA /* SectionLabelModel.m in Sources */,
 				C2FE7992232BA25F0016834A /* ABAddressBookGetter.m in Sources */,
 				C2FE794C232B85190016834A /* AppDelegate.m in Sources */,
+				531A7C4A232E67CF0016D4F5 /* SectionLabelViewCell.m in Sources */,
 				C2FE7973232B87F50016834A /* SelectedContactController.m in Sources */,
 				C2FE7986232B90DE0016834A /* SelectedContacts.m in Sources */,
 			);

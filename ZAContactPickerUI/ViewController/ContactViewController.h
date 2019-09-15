@@ -13,6 +13,10 @@
 #import "../SectionController/SelectedContactController.h"
 #import "../SectionController/SearchContactController.h"
 #import "../SectionController/ContactController.h"
+#import "../SectionController/SectionLabelController.h"
+#import "../Bussiness/ContactBusiness.h"
+#import "../Bussiness/ContactWithStatus.h"
+#import "../Bussiness/ContactBusiness.h"
 
 @interface ContactViewController : UIViewController <IGListAdapterDataSource, IGListAdapterDelegate>
 

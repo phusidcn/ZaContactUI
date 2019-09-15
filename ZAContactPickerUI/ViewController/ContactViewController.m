@@ -14,6 +14,10 @@
 @property UISearchBar* searchBar;
 @property IGListAdapter* adapter;
 @property MutableContactList* contactList;
+@property ContactBussiness* businessInterface;
+@property NSDictionary* displayAllContacts;
+@property NSArray<contactWithStatus*>* displaySearchContacts;
+@property NSArray<contactWithStatus*>* displaySelectedContacts;
 @end
 
 @implementation ContactViewController
@@ -25,6 +29,21 @@
     self.searchBar = [[UISearchBar alloc] init];
     self.adapter = [[IGListAdapter alloc] initWithUpdater:[IGListAdapterUpdater new] viewController:self workingRangeSize:0];
     [self loadViews];
+    self.businessInterface = [[ContactBussiness alloc] init];
+    [[self businessInterface] getAllContacInDevicetWithCompletionHandler:^(BOOL canGet) {
+        if (canGet) {
+            [[self businessInterface] groupContactToSectionWithCompletion:^{
+                self.displayAllContacts = self.businessInterface.dictionary;
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [[self contactListTableView] reloadData];
+                });
+            }];
+        } else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self alertCantAccessContact];
+            });
+        }
+    }];
 }
 
 - (void) loadViews {
@@ -52,10 +71,20 @@
     if ([object isKindOfClass:[ContactController class]]) {
         return [ContactController new];
     }
+    if ([object isKindOfClass:[SectionLabelController class]]) {
+        return [SectionLabelController new];
+    }
     return nil;
 }
 
 - (UIView*) emptyViewForListAdapter:(IGListAdapter *)listAdapter {
     return nil;
+}
+
+- (void) alertCantAccessContact {
+    UIAlertController *alertViewController = [UIAlertController alertControllerWithTitle:@"Access denied" message:@"This application can't access to your contact" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+    [alertViewController addAction:cancel];
+    [self presentViewController:alertViewController animated:true completion:nil];
 }
 @end

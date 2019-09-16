@@ -24,8 +24,17 @@
 
 - (void) layoutSubviews {
     CGSize viewSize = self.contentView.bounds.size;
-    self.iconLabel.frame = CGRectMake(0, 0, 75, 75);
-    self.contactName.frame = CGRectMake(100, 0, viewSize.width - 100, viewSize.height / 3);
-    self.phoneNumber.frame = CGRectMake(100, viewSize.height / 3 + 20, viewSize.width - 100, viewSize.height / 5);
+    self.iconLabel.frame = CGRectMake(20, 5, 65, 65);
+    self.iconLabel.textAlignment = NSTextAlignmentCenter;
+    self.iconLabel.font = [UIFont systemFontOfSize:30 weight:UIFontWeightSemibold];
+    self.iconLabel.clipsToBounds = true;
+    self.iconLabel.layer.cornerRadius = 65 / 2;
+    
+    self.contactName.frame = CGRectMake(110, 10, viewSize.width - 100, viewSize.height / 3);
+    self.contactName.font = [UIFont systemFontOfSize:20 weight:UIFontWeightMedium];
+    
+    self.phoneNumber.frame = CGRectMake(110, viewSize.height / 3 + 20, viewSize.width - 100, viewSize.height / 5);
+    self.phoneNumber.font = [UIFont systemFontOfSize:15];
+    self.iconLabel.backgroundColor = self.color;
 }
 @end

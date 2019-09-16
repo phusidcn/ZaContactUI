@@ -8,17 +8,22 @@
 
 #import <UIKit/UIKit.h>
 #import <IGListKit.h>
+#import <Foundation/Foundation.h>
 #import "../Model/SelectedContacts.h"
 #import "../Model/SearchBar.h"
-#import "../SectionController/SelectedContactController.h"
-#import "../SectionController/SearchContactController.h"
-#import "../SectionController/ContactController.h"
+#import "../SectionController/SelectedContactSectionController.h"
+#import "../SectionController/SearchContactSectionController.h"
+#import "../SectionController/ContactSectionController.h"
 #import "../SectionController/SectionLabelController.h"
 #import "../Bussiness/ContactBusiness.h"
 #import "../Bussiness/ContactWithStatus.h"
-#import "../Bussiness/ContactBusiness.h"
+#import "../Bussiness/ContactUtility.h"
+#import "../Model/ContactModel.h"
+#import "../Model/SectionLabelModel.h"
+#import "../Model/SelectedContacts.h"
+#import "../Model/SearchBar.h"
 
-@interface ContactViewController : UIViewController <IGListAdapterDataSource, IGListAdapterDelegate>
+@interface ContactViewController : UIViewController <IGListAdapterDataSource, IGListAdapterDelegate, SearchControllerDelegate>
 
 
 @end

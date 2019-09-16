@@ -14,11 +14,20 @@
     if (self) {
         self.searchbar = [[UISearchBar alloc] init];
         [self.contentView addSubview:self.searchbar];
+        self.searchbar.delegate = self;
     }
     return self;
 }
 
 - (void) layoutSubviews {
     self.searchbar.frame = CGRectMake(0, 0, self.contentView.bounds.size.width, 44);
+}
+
+- (void) searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    [self.delegate searchContactWithKeyword:searchText];
+}
+
+- (void) searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    [self.delegate cancelSearch];
 }
 @end

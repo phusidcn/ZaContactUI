@@ -9,11 +9,13 @@
 #import <UIKit/UIKit.h>
 #import <IGListKit.h>
 #import "../View/ContactViewCell.h"
+#import "../Model/ContactModel.h"
+#import "../Bussiness/ContactUtility.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ContactController : IGListSectionController
-
+@interface ContactSectionController : IGListSectionController
+@property ContactModel* contacts;
 @end
 
 NS_ASSUME_NONNULL_END

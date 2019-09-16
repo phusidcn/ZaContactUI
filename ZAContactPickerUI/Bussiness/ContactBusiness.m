@@ -110,6 +110,7 @@
 - (void) searchContactWithKey:(NSString *)key completion:(void(^)(NSError*))completion{
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         dispatch_barrier_async([self safeDispatchQueue], ^{
+            [[self searchIndexArray] removeAllObjects];
             contactUtility* utility = [[contactUtility alloc] init];
             for (int i = 0; i < [[self allContacts] count]; i++) {
                 NSString* fullName = [utility getContactFullNameOf:[[self allContacts] objectAtIndex:i]];

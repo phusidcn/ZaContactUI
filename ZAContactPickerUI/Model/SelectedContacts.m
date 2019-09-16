@@ -10,4 +10,32 @@
 
 @implementation SelectedContacts
 
+- (instancetype) initWithAvatarString:(NSString*) string AndColor:(UIColor*) color {
+    self = [super init];
+    if (self) {
+        self.iconColor = color;
+        self.avatarString = [NSString stringWithString:string];
+    }
+    return self;
+}
+
+- (instancetype) initWithContact:(contactWithStatus*) contact {
+    self = [super init];
+    if (self) {
+        contactUtility* utility = [[contactUtility alloc] init];
+        NSString* avatarString = [utility getAvatarOf:contact];
+        self.iconColor = [utility getColorOf:contact];
+        self.avatarString = [NSString stringWithString:avatarString];
+    }
+    return self;
+}
+
+- (nonnull id<NSObject>)diffIdentifier {
+    return self;
+}
+
+- (BOOL)isEqualToDiffableObject:(nullable id<IGListDiffable>)object {
+    return [self isEqual:object];
+}
+
 @end

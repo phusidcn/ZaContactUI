@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "../Bussiness/ContactUtility.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -14,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property UILabel* iconLabel;
 @property UILabel* contactName;
 @property UILabel* phoneNumber;
+@property UIColor* color;
 @end
 
 NS_ASSUME_NONNULL_END

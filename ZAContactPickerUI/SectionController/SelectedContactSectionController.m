@@ -6,13 +6,13 @@
 //  Copyright © 2019 CPU11899. All rights reserved.
 //
 
-#import "SelectedContactController.h"
+#import "SelectedContactSectionController.h"
 
-@interface SelectedContactController ()
+@interface SelectedContactSectionController ()
 @property NSMutableArray* selectedContactsArray;
 @end
 
-@implementation SelectedContactController
+@implementation SelectedContactSectionController
 
 - (NSInteger) numberOfItems {
     return self.selectedContactsArray.count;
@@ -27,4 +27,7 @@
     return cell;
 }
 
+- (void) didUpdateToObject:(id)object {
+    
+}
 @end

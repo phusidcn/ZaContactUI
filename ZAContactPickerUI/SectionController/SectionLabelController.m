@@ -9,16 +9,27 @@
 #import "SectionLabelController.h"
 
 @implementation SectionLabelController
+
+- (instancetype) init {
+    self = [super init];
+    return self;
+}
 - (NSInteger) numberOfItems {
     return 1;
 }
 
 - (CGSize) sizeForItemAtIndex:(NSInteger)index {
-    return CGSizeMake(100, 10);
+    CGSize viewSize = self.collectionContext.containerSize;
+    return CGSizeMake(viewSize.width, 20);
 }
 
 - (UICollectionViewCell*) cellForItemAtIndex:(NSInteger) index {
-    SectionLabelController* cell = [[self collectionContext] dequeueReusableCellOfClass:[SectionLabelController class] forSectionController:self atIndex:index];
+    SectionLabelViewCell* cell = [self.collectionContext dequeueReusableCellOfClass:[SectionLabelViewCell class] forSectionController:self atIndex:index];
+    cell.sectionLabel.text = self.sectionModel.label;
     return cell;
+}
+
+- (void) didUpdateToObject:(id)object {
+    self.sectionModel = (SectionLabelModel*)object;
 }
 @end

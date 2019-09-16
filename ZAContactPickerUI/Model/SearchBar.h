@@ -7,11 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <IGListKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SearchBar : NSObject
-
+@interface SearchBar : NSObject <IGListDiffable>
 @end
 
 NS_ASSUME_NONNULL_END

@@ -9,11 +9,12 @@
 #import <Foundation/Foundation.h>
 #import <IGListKit.h>
 #import "../View/SectionLabelViewCell.h"
+#import "../Model/SectionLabelModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SectionLabelController : IGListSectionController
-@property NSString* labelName;
+@property SectionLabelModel* sectionModel;
 @end
 
 NS_ASSUME_NONNULL_END

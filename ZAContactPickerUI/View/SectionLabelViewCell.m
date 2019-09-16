@@ -9,5 +9,17 @@
 #import "SectionLabelViewCell.h"
 
 @implementation SectionLabelViewCell
+- (instancetype) initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.sectionLabel = [[UILabel alloc] init];
+        [self.contentView addSubview:self.sectionLabel];
+    }
+    return self;
+}
 
+- (void) layoutSubviews {
+    self.sectionLabel.frame = CGRectMake(10, 0, 20, 20);
+    self.backgroundColor = [UIColor lightGrayColor];
+}
 @end

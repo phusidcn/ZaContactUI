@@ -9,9 +9,14 @@
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
+@protocol SearchDelegate <NSObject>
+- (void) searchContactWithKeyword:(NSString*) keyword;
+- (void) cancelSearch;
+@end
 
-@interface SearchViewCell : UICollectionViewCell
+@interface SearchViewCell : UICollectionViewCell <UISearchBarDelegate>
 @property UISearchBar* searchbar;
+@property id<SearchDelegate> delegate;
 @end
 
 NS_ASSUME_NONNULL_END

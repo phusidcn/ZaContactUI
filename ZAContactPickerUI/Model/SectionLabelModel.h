@@ -7,11 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <IGListKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SectionLabelModel : NSObject
-
+@interface SectionLabelModel : NSObject <IGListDiffable>
+@property NSString* label;
+- (instancetype) initWithLabel:(NSString*) label;
 @end
 
 NS_ASSUME_NONNULL_END

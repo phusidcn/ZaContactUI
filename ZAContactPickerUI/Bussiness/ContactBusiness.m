@@ -91,7 +91,7 @@
                 [adapter requestPermissionWithCompletionHandler:^(BOOL granted) {
                     if (granted) {
                         [adapter scanContactWithCompletionHandler:^(MutableContactList* _Nonnull contacts) {
-                            for (int i = 0; i < self.allContacts.count; i++) {
+                            for (int i = 0; i < [contacts count]; i++) {
                                 contactWithStatus* contactItem = [[contactWithStatus alloc] initContact:[[contacts array] objectAtIndex:i] WithIsSelected:false];
                                 [[self allContacts] addObject:contactItem];
                             }

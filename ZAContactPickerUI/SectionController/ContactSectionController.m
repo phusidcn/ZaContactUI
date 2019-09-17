@@ -23,20 +23,17 @@
 }
 
 - (NSInteger) numberOfItems {
-    return self.contacts.numberOfContacts;
+    //return self.contacts.numberOfContacts;
+    return 1;
 }
 
 - (CGSize) sizeForItemAtIndex:(NSInteger)index {
     CGSize viewSize = self.collectionContext.containerSize;
-    return CGSizeMake(viewSize.width, 75);
+    return CGSizeMake(viewSize.width, viewSize.height);
 }
 
 - (UICollectionViewCell*) cellForItemAtIndex:(NSInteger) index {
     ContactViewCell* cell = [self.collectionContext dequeueReusableCellOfClass:[ContactViewCell class] forSectionController:self atIndex:index];
-    cell.iconLabel.text = [self.utility getAvatarOf:[self.contacts contactAtIndex:index]];
-    cell.contactName.text = [self.utility getContactFullNameOf:[self.contacts contactAtIndex:index]];
-    cell.phoneNumber.text = [self.utility getPhoneNumberOf:[self.contacts contactAtIndex:index]];
-    cell.color = [self.utility getColorOf:[self.contacts contactAtIndex:index]];
     return cell;
 }
 

@@ -12,7 +12,10 @@
 @property UICollectionView* collectionView;
 @property UICollectionView* selectedView;
 @property UISearchBar* searchBar;
-@property IGListAdapter* adapter;
+
+
+@property IGListAdapter* adapterForContacts;
+@property IGListAdapter* adapterForSelected;
 @property MutableContactList* contactList;
 @property ContactBussiness* businessInterface;
 @property contactUtility* utility;
@@ -21,8 +24,10 @@
 @property NSArray<contactWithStatus*>* displaySelectedContacts;
 @property BOOL isSearching;
 @property BOOL isIntitialized;
+@property CGFloat heightOfSelectedContacts;
 
 @property NSMutableArray<id<IGListDiffable>>* modelArray;
+@property NSMutableArray<id<IGListDiffable>>* selectedArray;
 @end
 
 @implementation ContactViewController
@@ -30,21 +35,27 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:[UICollectionViewFlowLayout new]];
+    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 53 + 44, self.view.bounds.size.width, self.view.bounds.size.height - 53 - 44) collectionViewLayout:[UICollectionViewFlowLayout new]];
     self.searchBar = [[UISearchBar alloc] init];
-    IGListAdapterUpdater* adapterUpdate = [[IGListAdapterUpdater alloc] init];
-    self.adapter = [[IGListAdapter alloc] initWithUpdater:adapterUpdate viewController:self workingRangeSize:0];
+    self.selectedView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 53) collectionViewLayout:[UICollectionViewFlowLayout new]];
+    
+    IGListAdapterUpdater* adapterViewContacts = [[IGListAdapterUpdater alloc] init];
+    self.adapterForContacts = [[IGListAdapter alloc] initWithUpdater:adapterViewContacts viewController:self workingRangeSize:0];
+    
+    IGListAdapterUpdater* adapterSelectedContacts = [[IGListAdapterUpdater alloc] init];
+    self.adapterForSelected = [[IGListAdapter alloc] initWithUpdater:adapterSelectedContacts viewController:self workingRangeSize:0];
+    
     self.businessInterface = [[ContactBussiness alloc] init];
     self.utility = [[contactUtility alloc] init];
     self.isSearching = false;
     self.isIntitialized = false;
     self.modelArray = [[NSMutableArray alloc] init];
-    [[self businessInterface] getAllContacInDevicetWithCompletionHandler:^(BOOL canGet) {
+    [[self businessInterface] getAllContacInDeviceWithCompletionHandler:^(BOOL canGet) {
         if (canGet) {
             [[self businessInterface] groupContactToSectionWithCompletion:^{
                 self.displayAllContacts = self.businessInterface.dictionary;
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.adapter performUpdatesAnimated:true completion:^(BOOL complete) {
+                    [self.adapterForContacts performUpdatesAnimated:true completion:^(BOOL complete) {
                         NSLog(@"Get contact Complete");
                     }];
                 });
@@ -55,28 +66,46 @@
             });
         }
     }];
-    self.adapter.collectionView = self.collectionView;
-    self.adapter.dataSource = self;
+    self.adapterForContacts.collectionView = self.collectionView;
+    self.adapterForContacts.dataSource = self;
+    
+    self.adapterForSelected.collectionView = self.selectedView;
+    self.adapterForSelected.dataSource = self;
     [self loadViews];
 }
 
 - (void) loadViews {
     self.collectionView.backgroundColor = [UIColor whiteColor];
+    self.selectedView.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:self.searchBar];
+    [self.view addSubview:self.selectedView];
     [self.view addSubview:self.collectionView];
 }
 - (void) viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
-    self.collectionView.frame = self.view.bounds;
+    CGRect navigationSize = self.navigationController.navigationBar.frame;
+    self.selectedView.frame = CGRectMake(0, navigationSize.size.height, self.view.bounds.size.width, 100);
+    self.searchBar.frame = CGRectMake(0, navigationSize.size.height + 100, self.view.bounds.size.width, 44);
+    self.collectionView.frame = CGRectMake(0, navigationSize.size.height + 100 + 44, self.view.bounds.size.width, self.view.bounds.size.height - 100 - 44);
 }
 
 #pragma mark : - IGListKit DataSource
 - (NSArray<id<IGListDiffable>>*) objectsForListAdapter:(IGListAdapter *)listAdapter {
-    if (!self.isIntitialized) {
-        [self.modelArray addObject:[[SelectedContacts alloc] init]];
-        [self.modelArray addObject:[[SearchBar alloc] init]];
+    if (listAdapter == self.adapterForContacts) {
+        NSArray* headers = [[self.displayAllContacts allKeys] sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
+        for (NSString* key in headers) {
+            NSMutableArray* array = [self.displayAllContacts objectForKey:key];
+            [self.modelArray addObject:[[SectionLabelModel alloc] initWithLabel:key]];
+            for (contactWithStatus* contact in array) {
+                [self.modelArray addObject:[[ContactModel alloc] initWithContact:contact]];
+            }
+        }
+    } else {
+        if (listAdapter == self.adapterForSelected) {
+            //[self.selectedArray addObject:[[SelectedContacts alloc] initWithContact:<#(nonnull contactWithStatus *)#>]]
+        }
     }
-    [self.modelArray addObject:[[ContactModel alloc] initWithDictionary:self.displayAllContacts]];
-    self.isIntitialized = true;
+    
     return self.modelArray;
 }
 
@@ -115,7 +144,7 @@
         self.isSearching = false;
         [self.businessInterface cancelSearch];
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self.adapter performUpdatesAnimated:true completion:^(BOOL complete) {
+            [self.adapterForContacts performUpdatesAnimated:true completion:^(BOOL complete) {
                 NSLog(@"Complete");
             }];
         });
@@ -126,7 +155,7 @@
                 [self.businessInterface getSearchedContactWithCompletionHandler:^(NSArray<contactWithStatus*>* result) {
                     self.displaySearchContacts = result;
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        [self.adapter performUpdatesAnimated:true completion:^(BOOL complete) {
+                        [self.adapterForContacts performUpdatesAnimated:true completion:^(BOOL complete) {
                             NSLog(@"Search complete");
                         }];
                     });
@@ -138,8 +167,5 @@
 
 - (void) cancelSearch {
     self.isSearching = false;
-    [self.adapter performUpdatesAnimated:true completion:^(BOOL complete) {
-        NSLog(@"Update complete");
-    }];
 }
 @end

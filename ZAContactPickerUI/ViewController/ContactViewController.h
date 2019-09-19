@@ -23,7 +23,7 @@
 #import "../Model/SelectedContacts.h"
 #import "../Model/SearchBar.h"
 
-@interface ContactViewController : UIViewController <IGListAdapterDataSource, IGListAdapterDelegate, SearchControllerDelegate>
+@interface ContactViewController : UIViewController <IGListAdapterDataSource, IGListAdapterDelegate, SearchControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource>
 
 
 @end

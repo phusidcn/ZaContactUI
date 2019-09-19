@@ -16,9 +16,6 @@
 
 - (instancetype) init {
     self = [super init];
-    if (self) {
-        self.utility = [[contactUtility alloc] init];
-    }
     return self;
 }
 
@@ -29,11 +26,15 @@
 
 - (CGSize) sizeForItemAtIndex:(NSInteger)index {
     CGSize viewSize = self.collectionContext.containerSize;
-    return CGSizeMake(viewSize.width, viewSize.height);
+    return CGSizeMake(viewSize.width, 75);
 }
 
 - (UICollectionViewCell*) cellForItemAtIndex:(NSInteger) index {
     ContactViewCell* cell = [self.collectionContext dequeueReusableCellOfClass:[ContactViewCell class] forSectionController:self atIndex:index];
+    cell.iconLabel.text = [NSString stringWithString:self.contacts.avatarString];
+    cell.color = self.contacts.color;
+    cell.contactName.text = [NSString stringWithString:self.contacts.contactName];
+    cell.phoneNumber.text = [NSString stringWithString:self.contacts.phoneNumber];
     return cell;
 }
 

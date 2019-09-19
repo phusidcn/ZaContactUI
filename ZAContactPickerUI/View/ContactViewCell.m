@@ -29,6 +29,7 @@
     self.iconLabel.font = [UIFont systemFontOfSize:30 weight:UIFontWeightSemibold];
     self.iconLabel.clipsToBounds = true;
     self.iconLabel.layer.cornerRadius = 65 / 2;
+    self.iconLabel.textColor = [UIColor whiteColor];
     
     self.contactName.frame = CGRectMake(110, 10, viewSize.width - 100, viewSize.height / 3);
     self.contactName.font = [UIFont systemFontOfSize:20 weight:UIFontWeightMedium];

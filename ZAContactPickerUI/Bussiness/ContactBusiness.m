@@ -65,7 +65,7 @@
     });
 }
 
-- (void) getAllContacInDevicetWithCompletionHandler:(void (^)(BOOL))completion {
+- (void) getAllContacInDeviceWithCompletionHandler:(void (^)(BOOL))completion {
     contactAdapter* adapter = [[contactAdapter alloc] init];
     [adapter authorizeContactWithCompletionHandler:^(authorizationStatus status) {
         switch (status) {

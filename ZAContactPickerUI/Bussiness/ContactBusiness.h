@@ -26,7 +26,7 @@
 - (dispatch_queue_t _Nonnull ) safeDispatchQueue;
 - (void) groupContactToSectionWithCompletion:(void (^_Nullable)(void))completion;
 
-- (void) getAllContacInDevicetWithCompletionHandler:(void(^_Nonnull)(BOOL)) result;
+- (void) getAllContacInDeviceWithCompletionHandler:(void(^_Nonnull)(BOOL)) result;
 - (void) searchContactWithKey:(NSString*_Nonnull)key completion:(void(^_Nullable)(NSError* _Nullable))completion;
 - (void) cancelSearch;
 

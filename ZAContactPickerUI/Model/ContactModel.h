@@ -15,14 +15,13 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ContactModel : NSObject <IGListDiffable>
-@property NSDictionary* displayAllContacts;
-@property NSMutableArray* contacts;
-@property NSArray* headers;
-@property NSArray<contactWithStatus*>* displaySearchContacts;
-@property NSArray<contactWithStatus*>* displaySelectedContacts;
-- (instancetype) initWithDictionary:(NSDictionary*) contacts;
-- (NSInteger) numberOfContacts;
-- (contactWithStatus*) contactAtIndex:(NSInteger)index;
+@property NSString* avatarString;
+@property NSString* contactName;
+@property NSString* phoneNumber;
+@property UIColor* color;
+@property BOOL isSelected;
+
+- (instancetype) initWithContact:(contactWithStatus*) contact;
 @end
 
 NS_ASSUME_NONNULL_END

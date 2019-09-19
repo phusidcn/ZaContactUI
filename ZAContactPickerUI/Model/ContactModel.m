@@ -9,30 +9,19 @@
 #import "ContactModel.h"
 
 @implementation ContactModel
-- (instancetype) initWithDictionary:(NSDictionary*) contacts {
+- (instancetype) initWithContact:(contactWithStatus *)contact{
     self = [super init];
     if (self) {
-        self.contacts = [NSMutableArray array];
-        self.displayAllContacts = [NSDictionary dictionaryWithDictionary:contacts];
-        self.headers = [[self.displayAllContacts allKeys] sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
-        for (NSString* key in self.headers) {
-            NSMutableArray* array = [self.displayAllContacts objectForKey:key];
-            for (contactWithStatus* contact in array) {
-                [self.contacts addObject:contact];
-            }
-        }
-        //self.contacts = [self.displayAllContacts objectsForKeys:self.headers notFoundMarker:[NSNull null]];
+        contactUtility* utility = [[contactUtility alloc] init];
+        self.avatarString = [utility getAvatarOf:contact];
+        self.contactName = [utility getContactFullNameOf:contact];
+        self.phoneNumber = [utility getPhoneNumberOf:contact];
+        self.color = [utility getColorOf:contact];
     }
     return self;
 }
 
-- (NSInteger) numberOfContacts {
-    return self.contacts.count;
-}
 
-- (contactWithStatus*) contactAtIndex:(NSInteger)index {
-    return [self.contacts objectAtIndex:index];
-}
 
 - (nonnull id<NSObject>)diffIdentifier {
     return self;

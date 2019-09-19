@@ -13,10 +13,17 @@
 #import "../Model/ContactModel.h"
 #import "../Bussiness/ContactUtility.h"
 
+@protocol ContactDelegate <NSObject>
+
+- (void) selecteContactAtIndex:(NSInteger)index;
+
+@end
+
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ContactSectionController : IGListSectionController 
-@property ContactModel* contacts;
+@interface ContactSectionController : IGListSectionController
+@property id<ContactDelegate> delegate;
+@property ContactModel* contact;
 @end
 
 NS_ASSUME_NONNULL_END

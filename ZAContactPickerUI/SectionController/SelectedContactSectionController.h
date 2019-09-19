@@ -14,7 +14,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SelectedContactSectionController : IGListSectionController
-
+@property SelectedContacts* contact;
 @end
 
 NS_ASSUME_NONNULL_END

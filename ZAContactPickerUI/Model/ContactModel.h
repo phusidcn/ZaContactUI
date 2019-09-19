@@ -20,8 +20,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property NSString* phoneNumber;
 @property UIColor* color;
 @property BOOL isSelected;
+@property NSInteger index;
 
-- (instancetype) initWithContact:(contactWithStatus*) contact;
+- (instancetype) initWithContact:(contactWithStatus*) contact AndIndex:(NSInteger)index;
 @end
 
 NS_ASSUME_NONNULL_END

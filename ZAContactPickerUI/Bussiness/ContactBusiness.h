@@ -30,10 +30,11 @@
 - (void) searchContactWithKey:(NSString*_Nonnull)key completion:(void(^_Nullable)(NSError* _Nullable))completion;
 - (void) cancelSearch;
 
-- (void) selectOneContactAtIndex:(NSIndexPath*_Nullable) indexPath completion:(void(^_Nullable)(NSError* _Nullable)) completion;
+- (void) selectOneContactAtIndexPath:(NSIndexPath*_Nullable) indexPath completion:(void(^_Nullable)(NSError* _Nullable)) completion;
+- (void) selectOneContactAtIndex:(NSInteger) index completion:(void(^_Nullable)(NSError* _Nullable)) completion;
 - (void) deselectContactAtIndex:(NSIndexPath*_Nullable)index completion:(void (^_Nullable)(NSError* _Nullable)) completion;
 
-- (void) selectSearchedContactAt:(NSIndexPath*_Nullable) indexPath completion: (void(^_Nullable)(NSError* _Nullable)) completion;
+- (void) selectSearchedContactAtIndexPath:(NSIndexPath*_Nullable) indexPath completion: (void(^_Nullable)(NSError* _Nullable)) completion;
 - (void) deselectSearchedContactAt:(NSIndexPath*_Nullable) indexPath completion:(void(^_Nullable)(NSError* _Nullable)) completion;
 
 - (void) getSelectedContactWithCompletionHandler: (void(^_Nullable)(NSArray<contactWithStatus*>* _Nullable)) completion;

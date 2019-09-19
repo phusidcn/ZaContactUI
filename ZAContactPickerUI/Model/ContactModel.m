@@ -9,7 +9,7 @@
 #import "ContactModel.h"
 
 @implementation ContactModel
-- (instancetype) initWithContact:(contactWithStatus *)contact{
+- (instancetype) initWithContact:(contactWithStatus *)contact AndIndex:(NSInteger)index{
     self = [super init];
     if (self) {
         contactUtility* utility = [[contactUtility alloc] init];
@@ -17,6 +17,8 @@
         self.contactName = [utility getContactFullNameOf:contact];
         self.phoneNumber = [utility getPhoneNumberOf:contact];
         self.color = [utility getColorOf:contact];
+        self.isSelected = contact.isSelected;
+        self.index = index;
     }
     return self;
 }

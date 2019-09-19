@@ -31,18 +31,19 @@
 
 - (UICollectionViewCell*) cellForItemAtIndex:(NSInteger) index {
     ContactViewCell* cell = [self.collectionContext dequeueReusableCellOfClass:[ContactViewCell class] forSectionController:self atIndex:index];
-    cell.iconLabel.text = [NSString stringWithString:self.contacts.avatarString];
-    cell.color = self.contacts.color;
-    cell.contactName.text = [NSString stringWithString:self.contacts.contactName];
-    cell.phoneNumber.text = [NSString stringWithString:self.contacts.phoneNumber];
+    cell.iconLabel.text = [NSString stringWithString:self.contact.avatarString];
+    cell.color = self.contact.color;
+    cell.contactName.text = [NSString stringWithString:self.contact.contactName];
+    cell.phoneNumber.text = [NSString stringWithString:self.contact.phoneNumber];
     return cell;
 }
 
 - (void) didUpdateToObject:(id)object {
-    self.contacts = (ContactModel*)object;
+    self.contact = (ContactModel*)object;
 }
 
 - (void) didSelectItemAtIndex:(NSInteger)index {
-    NSLog(@"%lu",index);
+    NSLog(@"%lu",self.contact.index);
+    [self.delegate selecteContactAtIndex:self.contact.index];
 }
 @end

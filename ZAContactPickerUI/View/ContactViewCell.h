@@ -16,6 +16,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property UILabel* contactName;
 @property UILabel* phoneNumber;
 @property UIColor* color;
+@property BOOL isSelected;
+@property UIImageView* checkedIcon;
+@property UIImage* checkedImage;
+@property UIImage* uncheckedImage;
 @end
 
 NS_ASSUME_NONNULL_END

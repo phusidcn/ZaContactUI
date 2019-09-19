@@ -12,8 +12,9 @@
 @interface contactWithStatus : NSObject
 @property contactInstance* instance;
 @property BOOL isSelected;
+@property NSInteger index;
 - (instancetype) init;
-- (instancetype) initContact:(contactInstance*)contact WithIsSelected:(BOOL)selected;
+- (instancetype) initContact:(contactInstance*)contact WithIsSelected:(BOOL)selected AndIndex:(NSInteger)index;
 @end
 
 #endif /* ContactStatus_h */

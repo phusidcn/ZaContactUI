@@ -10,22 +10,24 @@
 
 @implementation SelectedContacts
 
-- (instancetype) initWithAvatarString:(NSString*) string AndColor:(UIColor*) color {
+- (instancetype) initWithAvatarString:(NSString*) string AndColor:(UIColor*) color AndIndex:(NSInteger) index{
     self = [super init];
     if (self) {
         self.iconColor = color;
         self.avatarString = [NSString stringWithString:string];
+        self.index = index;
     }
     return self;
 }
 
-- (instancetype) initWithContact:(contactWithStatus*) contact {
+- (instancetype) initWithContact:(contactWithStatus*) contact AndIndex:(NSInteger)index{
     self = [super init];
     if (self) {
         contactUtility* utility = [[contactUtility alloc] init];
         NSString* avatarString = [utility getAvatarOf:contact];
         self.iconColor = [utility getColorOf:contact];
         self.avatarString = [NSString stringWithString:avatarString];
+        self.index = index;
     }
     return self;
 }

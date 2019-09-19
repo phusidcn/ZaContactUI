@@ -16,11 +16,12 @@
     return self;
 }
 
-- (instancetype) initContact:(contactInstance *)contact WithIsSelected:(BOOL)selected {
+- (instancetype) initContact:(contactInstance *)contact WithIsSelected:(BOOL)selected AndIndex:(NSInteger)index {
     self = [super init];
     if (self) {
         [self setInstance:contact];
         [self setIsSelected:selected];
+        [self setIndex:index];
     }
     return self;
 }

@@ -79,7 +79,7 @@
             {
                 [adapter scanContactWithCompletionHandler:^(MutableContactList* _Nonnull contacts) {
                     for (int i = 0; i < [contacts count]; i++) {
-                        contactWithStatus* contactItem = [[contactWithStatus alloc] initContact:[[contacts array] objectAtIndex:i] WithIsSelected:false];
+                        contactWithStatus* contactItem = [[contactWithStatus alloc] initContact:[[contacts array] objectAtIndex:i] WithIsSelected:false AndIndex:i];
                         [[self allContacts] addObject:contactItem];
                     }
                     completion(true);
@@ -92,7 +92,7 @@
                     if (granted) {
                         [adapter scanContactWithCompletionHandler:^(MutableContactList* _Nonnull contacts) {
                             for (int i = 0; i < [contacts count]; i++) {
-                                contactWithStatus* contactItem = [[contactWithStatus alloc] initContact:[[contacts array] objectAtIndex:i] WithIsSelected:false];
+                                contactWithStatus* contactItem = [[contactWithStatus alloc] initContact:[[contacts array] objectAtIndex:i] WithIsSelected:false AndIndex:i];
                                 [[self allContacts] addObject:contactItem];
                             }
                             completion(true);
@@ -147,7 +147,7 @@
     return sumOfContactBeforeSection;
 }
 
-- (void) selectOneContactAtIndex:(NSIndexPath*) indexPath completion:(void(^)(NSError*))completion {
+- (void) selectOneContactAtIndexPath:(NSIndexPath*) indexPath completion:(void(^)(NSError*))completion {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         dispatch_barrier_async([self safeDispatchQueue], ^{
             if (indexPath.row < self.titleForSection.count ) {
@@ -176,6 +176,13 @@
     });
 }
 
+- (void) selectOneContactAtIndex:(NSInteger)index completion:(void (^)(NSError * _Nullable))completion {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [[self.allContacts objectAtIndex:index] setIsSelected:true];
+        completion(nil);
+    });
+}
+
 - (void) deselectContactAtIndex:(NSIndexPath*) indexPath completion:(void(^)(NSError* ))completion {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         dispatch_barrier_async([self safeDispatchQueue], ^{
@@ -199,7 +206,7 @@
     });
 }
 
-- (void) selectSearchedContactAt:(NSIndexPath*) index completion:(void(^)(NSError*))completion {
+- (void) selectSearchedContactAtIndexPath:(NSIndexPath*) index completion:(void(^)(NSError*))completion {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         dispatch_barrier_async([self safeDispatchQueue], ^{
             NSUInteger row = index.row;
@@ -207,7 +214,7 @@
             if (section < self.titleForSection.count) {
                 NSUInteger indexValue = [[[self searchIndexArray] objectAtIndex:row] integerValue];
                 NSIndexPath* indexPath = [self convertIndexToIndexPath:indexValue];
-                [self selectOneContactAtIndex:indexPath completion:^(NSError* error) {
+                [self selectOneContactAtIndexPath:indexPath completion:^(NSError* error) {
                     completion(error);
                 }];
             } else {

@@ -28,6 +28,6 @@
 }
 
 - (void) didUpdateToObject:(id)object {
-    
+    self.contact = (SelectedContacts*)object;
 }
 @end

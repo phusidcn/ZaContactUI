@@ -10,9 +10,7 @@
 #import <IGListKit/IGListAdapter.h>
 #import <IGListKit/IGListCollectionViewDelegateLayout.h>
 
-@interface IGListAdapter (UICollectionView)
-<
-UICollectionViewDataSource,
+@interface IGListAdapter (UICollectionView)<UICollectionViewDataSource,
 IGListCollectionViewDelegateLayout
 >
 @end

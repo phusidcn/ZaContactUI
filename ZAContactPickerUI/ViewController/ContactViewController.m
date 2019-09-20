@@ -117,6 +117,12 @@
 }
 
 - (IGListSectionController*) listAdapter:(IGListAdapter *)listAdapter sectionControllerForObject:(id)object {
+    if (listAdapter == self.adapterForSelected) {
+        if ([object isKindOfClass:[SelectedContacts class]]) {
+            SelectedContactSectionController* controller = [SelectedContactSectionController new];
+            return controller;
+        }
+    }
     if (listAdapter == self.adapterForContacts) {
         if ([object isKindOfClass:[ContactModel class]]) {
             ContactSectionController* controller = [ContactSectionController new];
@@ -125,11 +131,6 @@
         }
         if ([object isKindOfClass:[SectionLabelModel class]]) {
             return [SectionLabelController new];
-        }
-    }
-    if (listAdapter == self.adapterForSelected) {
-        if ([object isKindOfClass:[SelectedContacts class]]) {
-            return [SelectedContactSectionController new];
         }
     }
     return nil;
@@ -168,6 +169,17 @@
     }];
 }
 
+- (void) collapseSelectedBar {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        //self.selectedView.frame.size.height = 0.0;
+    });
+}
+
+- (void) showSelectedBar {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        //self.selectedView.frame.size.height = 53;
+    });
+}
 #pragma mark : - Search Delegate
 - (void) searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     if (searchText.length == 0) {

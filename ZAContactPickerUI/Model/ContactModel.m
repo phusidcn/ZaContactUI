@@ -23,8 +23,6 @@
     return self;
 }
 
-
-
 - (nonnull id<NSObject>)diffIdentifier {
     return self;
 }

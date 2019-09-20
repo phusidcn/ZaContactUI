@@ -179,6 +179,7 @@
 - (void) selectOneContactAtIndex:(NSInteger)index completion:(void (^)(NSError * _Nullable))completion {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [[self.allContacts objectAtIndex:index] setIsSelected:true];
+        [self.selectedIndexArray addObject:[NSNumber numberWithInteger:index]];
         completion(nil);
     });
 }
@@ -209,6 +210,11 @@
 - (void) deselectContactAtIndex:(NSInteger)index completion:(void (^)(NSError * _Nullable))completion {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [[self.allContacts objectAtIndex:index] setIsSelected:false];
+        for (NSNumber *indexNumber in self.selectedIndexArray) {
+            if ([indexNumber integerValue] == index) {
+                [self.selectedIndexArray removeObject:indexNumber];
+            }
+        }
         completion(nil);
     });
 }

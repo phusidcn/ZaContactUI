@@ -51,6 +51,7 @@
     self.isIntitialized = false;
     self.modelArray = [[NSMutableArray alloc] init];
     self.selectedArray = [[NSMutableArray alloc] init];
+    self.displaySelectedContacts = [[NSArray alloc] init];
     [[self businessInterface] getAllContacInDeviceWithCompletionHandler:^(BOOL canGet) {
         if (canGet) {
             [[self businessInterface] groupContactToSectionWithCompletion:^{
@@ -80,8 +81,8 @@
 - (void) loadViews {
     self.collectionView.backgroundColor = [UIColor whiteColor];
     self.selectedView.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:self.searchBar];
     [self.view addSubview:self.selectedView];
+    [self.view addSubview:self.searchBar];
     [self.view addSubview:self.collectionView];
 }
 - (void) viewDidLayoutSubviews {
@@ -109,10 +110,6 @@
         return self.modelArray;
     } else {
         if (listAdapter == self.adapterForSelected) {
-            [self.selectedArray removeAllObjects];
-            for (contactWithStatus* contact in self.displaySelectedContacts) {
-                [self.selectedArray addObject:[[SelectedContacts alloc] initWithContact:contact AndIndex:contact.index]];
-            }
             return self.selectedArray;
         }
     }
@@ -143,15 +140,31 @@
 }
 
 #pragma mark : - Contacts Delegate
-- (void) selectedContactAtIndex:(NSInteger)index {
-    [self.businessInterface selectOneContactAtIndex:index completion:^(NSError* error) {
-        contactWithStatus* contact = [[self.businessInterface allContacts] objectAtIndex:index];
+- (void) selectedContact:(ContactModel*)contact {
+    [self.businessInterface selectOneContactAtIndex:contact.index completion:^(NSError* error) {
+        [self.businessInterface getSelectedContactWithCompletionHandler:^(NSArray<contactWithStatus*>* result) {
+            [self.selectedArray removeAllObjects];
+            for (contactWithStatus* contact in result) {
+                [self.selectedArray addObject:[[SelectedContacts alloc] initWithContact:contact AndIndex:contact.index]];
+            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.adapterForSelected performUpdatesAnimated:false completion:nil];
+            });
+        }];
     }];
 }
 
-- (void) deselectedContactAtIndex:(NSInteger)index  {
-    [self.businessInterface deselectContactAtIndex:index completion:^(NSError* error) {
-        contactWithStatus* contact = [[self.businessInterface allContacts] objectAtIndex:index];
+- (void) deselectedContact:(ContactModel*)contact  {
+    [self.businessInterface deselectContactAtIndex:contact.index completion:^(NSError* error) {
+        [self.businessInterface getSelectedContactWithCompletionHandler:^(NSArray<contactWithStatus*>* result) {
+            [self.selectedArray removeAllObjects];
+            for (contactWithStatus* contact in result) {
+                [self.selectedArray addObject:[[SelectedContacts alloc] initWithContact:contact AndIndex:contact.index]];
+            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.adapterForSelected performUpdatesAnimated:false completion:nil];
+            });
+        }];
     }];
 }
 
@@ -178,14 +191,11 @@
     }
 }
 
+#pragma mark : - alert message
 - (void) alertCantAccessContact {
     UIAlertController *alertViewController = [UIAlertController alertControllerWithTitle:@"Access denied" message:@"This application can't access to your contact" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
     [alertViewController addAction:cancel];
     [self presentViewController:alertViewController animated:true completion:nil];
-}
-
-- (void) cancelSearch {
-    self.isSearching = false;
 }
 @end

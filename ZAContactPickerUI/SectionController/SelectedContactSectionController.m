@@ -13,6 +13,11 @@
 
 @implementation SelectedContactSectionController
 
+- (instancetype) init {
+    self = [super init];
+    return self;
+}
+
 - (NSInteger) numberOfItems {
     return 1;
 }
@@ -23,9 +28,11 @@
 
 - (UICollectionViewCell*) cellForItemAtIndex:(NSInteger) index {
     SelectedViewCell* cell = [self.collectionContext dequeueReusableCellOfClass:[SelectedViewCell class] forSectionController:self atIndex:index];
-    
     cell.iconLabel.text = self.contact.avatarString;
-    cell.iconLabel.backgroundColor = self.contact.iconColor;
+    cell.contentView.backgroundColor = self.contact.iconColor;
+    cell.clipsToBounds = true;
+    cell.layer.cornerRadius = cell.frame.size.height / 2;
+    [cell layoutSubviews];
     return cell;
 }
 

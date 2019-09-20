@@ -15,8 +15,8 @@
 
 @protocol ContactDelegate <NSObject>
 
-- (void) selectedContactAtIndex:(NSInteger)index;
-- (void) deselectedContactAtIndex:(NSInteger)index;
+- (void) selectedContact:(ContactModel* _Nullable)model;
+- (void) deselectedContact:(ContactModel* _Nullable)model;
 
 @end
 

@@ -10,7 +10,7 @@
 
 @implementation SelectedContacts
 
-- (instancetype) initWithAvatarString:(NSString*) string AndColor:(UIColor*) color AndIndex:(NSInteger) index{
+- (instancetype) initWithAvatarString:(NSString*) string Color:(UIColor*) color AndIndex:(NSInteger) index{
     self = [super init];
     if (self) {
         self.iconColor = color;

@@ -54,10 +54,10 @@
 - (void) didSelectItemAtIndex:(NSInteger)index {
     NSLog(@"%lu",self.contact.index);
     if (self.contact.isSelected) {
-        [self.delegate deselectedContactAtIndex:self.contact.index];
+        [self.delegate deselectedContact:self.contact];
         self.contact.isSelected = false;
     } else {
-        [self.delegate selectedContactAtIndex:self.contact.index];
+        [self.delegate selectedContact:self.contact];
         self.contact.isSelected = true;
     }
     [self.collectionContext performBatchAnimated:false updates:^(id<IGListBatchContext> batchContext) {

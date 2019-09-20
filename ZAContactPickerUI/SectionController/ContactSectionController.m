@@ -19,15 +19,6 @@
     return self;
 }
 
-+ (contactUtility*) utility {
-    __block contactUtility* utility;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        utility = [[contactUtility alloc] init];
-    });
-    return utility;
-}
-
 - (NSInteger) numberOfItems {
     return 1;
 }

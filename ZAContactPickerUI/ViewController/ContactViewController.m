@@ -118,8 +118,8 @@
 
 - (IGListSectionController*) listAdapter:(IGListAdapter *)listAdapter sectionControllerForObject:(id)object {
     if (listAdapter == self.adapterForSelected) {
-        if ([object isKindOfClass:[SelectedContacts class]]) {
-            SelectedContactSectionController* controller = [SelectedContactSectionController new];
+        if ([object isKindOfClass:[SelectedContactsModel class]]) {
+            SelectedContactsController* controller = [SelectedContactsController new];
             return controller;
         }
     }
@@ -145,9 +145,11 @@
     [self.businessInterface selectOneContactAtIndex:contact.index completion:^(NSError* error) {
         [self.businessInterface getSelectedContactWithCompletionHandler:^(NSArray<contactWithStatus*>* result) {
             [self.selectedArray removeAllObjects];
+            /*
             for (contactWithStatus* contact in result) {
-                [self.selectedArray addObject:[[SelectedContacts alloc] initWithContact:contact AndIndex:contact.index]];
-            }
+                [self.selectedArray addObject:[[SelectedContact alloc] initWithContact:contact AndIndex:contact.index]];
+            }*/
+            [self.selectedArray addObject:[[SelectedContactsModel alloc] initWithContacts:result]];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.adapterForSelected performUpdatesAnimated:false completion:nil];
             });
@@ -159,9 +161,11 @@
     [self.businessInterface deselectContactAtIndex:contact.index completion:^(NSError* error) {
         [self.businessInterface getSelectedContactWithCompletionHandler:^(NSArray<contactWithStatus*>* result) {
             [self.selectedArray removeAllObjects];
+            /*
             for (contactWithStatus* contact in result) {
-                [self.selectedArray addObject:[[SelectedContacts alloc] initWithContact:contact AndIndex:contact.index]];
-            }
+                [self.selectedArray addObject:[[SelectedContact alloc] initWithContact:contact AndIndex:contact.index]];
+            }*/
+            [self.selectedArray addObject:[[SelectedContactsModel alloc] initWithContacts:result]];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.adapterForSelected performUpdatesAnimated:false completion:nil];
             });

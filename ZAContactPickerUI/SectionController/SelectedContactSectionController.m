@@ -37,7 +37,7 @@
 }
 
 - (void) didUpdateToObject:(id)object {
-    self.contact = (SelectedContacts*)object;
+    self.contact = (SelectedContact*)object;
     [self.collectionContext performBatchAnimated:true updates:^(id<IGListBatchContext> batchContext) {
         [batchContext reloadSectionController:self];
     } completion:nil];

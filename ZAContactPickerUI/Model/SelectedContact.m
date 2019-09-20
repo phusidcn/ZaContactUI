@@ -6,9 +6,9 @@
 //  Copyright © 2019 CPU11899. All rights reserved.
 //
 
-#import "SelectedContacts.h"
+#import "SelectedContact.h"
 
-@implementation SelectedContacts
+@implementation SelectedContact
 
 - (instancetype) initWithAvatarString:(NSString*) string Color:(UIColor*) color AndIndex:(NSInteger) index{
     self = [super init];

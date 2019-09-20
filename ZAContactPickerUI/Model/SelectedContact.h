@@ -15,13 +15,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SelectedContacts : NSObject <IGListDiffable>
+@interface SelectedContact : NSObject <IGListDiffable>
 @property UIColor* iconColor;
 @property NSString* avatarString;
 @property NSInteger index;
 - (instancetype) initWithContact:(contactWithStatus*) contact AndIndex:(NSInteger)index;
 - (instancetype) initWithAvatarString:(NSString*) string Color:(UIColor*) color
                              AndIndex:(NSInteger)index;
+
 @end
 
 NS_ASSUME_NONNULL_END

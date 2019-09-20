@@ -32,7 +32,8 @@
 
 - (void) selectOneContactAtIndexPath:(NSIndexPath*_Nullable) indexPath completion:(void(^_Nullable)(NSError* _Nullable)) completion;
 - (void) selectOneContactAtIndex:(NSInteger) index completion:(void(^_Nullable)(NSError* _Nullable)) completion;
-- (void) deselectContactAtIndex:(NSIndexPath*_Nullable)index completion:(void (^_Nullable)(NSError* _Nullable)) completion;
+- (void) deselectContactAtIndexPath:(NSIndexPath*_Nullable)index completion:(void (^_Nullable)(NSError* _Nullable)) completion;
+- (void) deselectContactAtIndex:(NSInteger)index completion:(void(^_Nullable)(NSError* _Nullable)) completion;
 
 - (void) selectSearchedContactAtIndexPath:(NSIndexPath*_Nullable) indexPath completion: (void(^_Nullable)(NSError* _Nullable)) completion;
 - (void) deselectSearchedContactAt:(NSIndexPath*_Nullable) indexPath completion:(void(^_Nullable)(NSError* _Nullable)) completion;

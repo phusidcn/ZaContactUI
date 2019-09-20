@@ -183,7 +183,7 @@
     });
 }
 
-- (void) deselectContactAtIndex:(NSIndexPath*) indexPath completion:(void(^)(NSError* ))completion {
+- (void) deselectContactAtIndexPath:(NSIndexPath*) indexPath completion:(void(^)(NSError* ))completion {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         dispatch_barrier_async([self safeDispatchQueue], ^{
             if (indexPath.section < self.titleForSection.count) {
@@ -203,6 +203,13 @@
                 completion(error);
             }
         });
+    });
+}
+
+- (void) deselectContactAtIndex:(NSInteger)index completion:(void (^)(NSError * _Nullable))completion {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [[self.allContacts objectAtIndex:index] setIsSelected:false];
+        completion(nil);
     });
 }
 
@@ -233,7 +240,7 @@
             if (section < self.titleForSection.count) {
                 NSUInteger indexValue = [[[self searchIndexArray] objectAtIndex:row] integerValue];
                 NSIndexPath* indexPath = [self convertIndexToIndexPath:indexValue];
-                [self deselectContactAtIndex:indexPath completion:^(NSError* error) {
+                [self deselectContactAtIndexPath:indexPath completion:^(NSError* error) {
                     completion(error);
                 }];
             } else {

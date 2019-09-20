@@ -22,6 +22,7 @@
     self.iconLabel.frame = CGRectMake(0, 0, 53, 33);
     self.iconLabel.font = [UIFont systemFontOfSize:30 weight:UIFontWeightSemibold];
     self.iconLabel.center = CGPointMake(self.contentView.bounds.size.width / 2, self.contentView.bounds.size.height / 2);
+    self.clipsToBounds = true;
     self.layer.cornerRadius = 53 / 2;
 }
 @end

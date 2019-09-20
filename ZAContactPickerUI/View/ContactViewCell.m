@@ -44,7 +44,6 @@
     
     self.phoneNumber.frame = CGRectMake(150, viewSize.height / 3 + 20, viewSize.width - 100, viewSize.height / 5);
     self.phoneNumber.font = [UIFont systemFontOfSize:15];
-    
 }
 
 - (void) checkBoxSet {

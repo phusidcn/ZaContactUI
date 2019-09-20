@@ -9,21 +9,23 @@
 #import "SelectedContactSectionController.h"
 
 @interface SelectedContactSectionController ()
-@property NSMutableArray* selectedContactsArray;
 @end
 
 @implementation SelectedContactSectionController
 
 - (NSInteger) numberOfItems {
-    return self.selectedContactsArray.count;
+    return 1;
 }
 
 - (CGSize) sizeForItemAtIndex:(NSInteger)index {
     return CGSizeMake(53, 53);
 }
 
-- (UICollectionViewCell*) cellForItemAtindex:(NSInteger) index {
+- (UICollectionViewCell*) cellForItemAtIndex:(NSInteger) index {
     SelectedViewCell* cell = [self.collectionContext dequeueReusableCellOfClass:[SelectedViewCell class] forSectionController:self atIndex:index];
+    
+    cell.iconLabel.text = self.contact.avatarString;
+    cell.iconLabel.backgroundColor = self.contact.iconColor;
     return cell;
 }
 

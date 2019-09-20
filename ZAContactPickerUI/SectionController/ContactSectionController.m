@@ -9,7 +9,7 @@
 #import "ContactSectionController.h"
 
 @interface ContactSectionController ()
-@property contactUtility* utility;
++ (contactUtility*) utility;
 @end
 
 @implementation ContactSectionController
@@ -19,11 +19,18 @@
     return self;
 }
 
-- (NSInteger) numberOfItems {
-    //return self.contacts.numberOfContacts;
-    return 1;
++ (contactUtility*) utility {
+    __block contactUtility* utility;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        utility = [[contactUtility alloc] init];
+    });
+    return utility;
 }
 
+- (NSInteger) numberOfItems {
+    return 1;
+}
 - (CGSize) sizeForItemAtIndex:(NSInteger)index {
     CGSize viewSize = self.collectionContext.containerSize;
     return CGSizeMake(viewSize.width, 75);
@@ -35,6 +42,8 @@
     cell.color = self.contact.color;
     cell.contactName.text = [NSString stringWithString:self.contact.contactName];
     cell.phoneNumber.text = [NSString stringWithString:self.contact.phoneNumber];
+    cell.isSelected = self.contact.isSelected;
+    [cell layoutSubviews];
     return cell;
 }
 
@@ -44,6 +53,15 @@
 
 - (void) didSelectItemAtIndex:(NSInteger)index {
     NSLog(@"%lu",self.contact.index);
-    [self.delegate selecteContactAtIndex:self.contact.index];
+    if (self.contact.isSelected) {
+        [self.delegate deselectedContactAtIndex:self.contact.index];
+        self.contact.isSelected = false;
+    } else {
+        [self.delegate selectedContactAtIndex:self.contact.index];
+        self.contact.isSelected = true;
+    }
+    [self.collectionContext performBatchAnimated:false updates:^(id<IGListBatchContext> batchContext) {
+        [batchContext reloadSectionController:self];
+    } completion:nil];
 }
 @end

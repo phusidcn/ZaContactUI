@@ -70,6 +70,8 @@
     self.adapterForContacts.collectionView = self.collectionView;
     self.adapterForContacts.dataSource = self;
     
+    self.searchBar.delegate = self;
+    
     self.adapterForSelected.collectionView = self.selectedView;
     self.adapterForSelected.dataSource = self;
     [self loadViews];
@@ -84,26 +86,30 @@
 }
 - (void) viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
-    CGRect navigationSize = self.navigationController.navigationBar.frame;
-    self.selectedView.frame = CGRectMake(0, navigationSize.size.height, self.view.bounds.size.width, 100);
-    self.searchBar.frame = CGRectMake(0, navigationSize.size.height + 100, self.view.bounds.size.width, 44);
-    self.collectionView.frame = CGRectMake(0, navigationSize.size.height + 100 + 44, self.view.bounds.size.width, self.view.bounds.size.height - 100 - 44);
+    CGRect navigationRect = self.navigationController.navigationBar.frame;
+    CGFloat contentY = navigationRect.size.height + navigationRect.origin.y;
+    self.selectedView.frame = CGRectMake(0, contentY, self.view.bounds.size.width, 53);
+    self.searchBar.frame = CGRectMake(0, contentY + 53, self.view.bounds.size.width, 44);
+    self.collectionView.frame = CGRectMake(0, contentY + 53 + 44, self.view.bounds.size.width, self.view.bounds.size.height - contentY - 53 - 44);
 }
 
 #pragma mark : - IGListKit DataSource
 - (NSArray<id<IGListDiffable>>*) objectsForListAdapter:(IGListAdapter *)listAdapter {
     if (listAdapter == self.adapterForContacts) {
-        [self.modelArray removeAllObjects];
-        for (NSString* header in self.businessInterface.titleForSection) {
-            [self.modelArray addObject:[[SectionLabelModel alloc] initWithLabel:header]];
-            NSArray* array = [self.displayAllContacts objectForKey:header];
-            for (contactWithStatus* contact in array) {
-                [self.modelArray addObject:[[ContactModel alloc] initWithContact:contact AndIndex:contact.index]];
+        if (!self.isSearching) {
+            [self.modelArray removeAllObjects];
+            for (NSString* header in self.businessInterface.titleForSection) {
+                [self.modelArray addObject:[[SectionLabelModel alloc] initWithLabel:header]];
+                NSArray* array = [self.displayAllContacts objectForKey:header];
+                for (contactWithStatus* contact in array) {
+                    [self.modelArray addObject:[[ContactModel alloc] initWithContact:contact AndIndex:contact.index]];
+                }
             }
         }
         return self.modelArray;
     } else {
         if (listAdapter == self.adapterForSelected) {
+            [self.selectedArray removeAllObjects];
             for (contactWithStatus* contact in self.displaySelectedContacts) {
                 [self.selectedArray addObject:[[SelectedContacts alloc] initWithContact:contact AndIndex:contact.index]];
             }
@@ -137,20 +143,39 @@
 }
 
 #pragma mark : - Contacts Delegate
-- (void) selecteContactAtIndex:(NSInteger)index {
+- (void) selectedContactAtIndex:(NSInteger)index {
     [self.businessInterface selectOneContactAtIndex:index completion:^(NSError* error) {
         contactWithStatus* contact = [[self.businessInterface allContacts] objectAtIndex:index];
-        [self.selectedArray addObject:[[SelectedContacts alloc] initWithContact:contact AndIndex:contact.index]];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.adapterForContacts performUpdatesAnimated:true completion:nil];
-            [self.adapterForSelected performUpdatesAnimated:true completion:nil];
-        });
+    }];
+}
+
+- (void) deselectedContactAtIndex:(NSInteger)index  {
+    [self.businessInterface deselectContactAtIndex:index completion:^(NSError* error) {
+        contactWithStatus* contact = [[self.businessInterface allContacts] objectAtIndex:index];
     }];
 }
 
 #pragma mark : - Search Delegate
 - (void) searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    
+    if (searchText.length == 0) {
+        self.isSearching = false;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.adapterForContacts performUpdatesAnimated:true completion:nil];
+        });
+    } else {
+        self.isSearching = true;
+        [self.modelArray removeAllObjects];
+        [self.businessInterface searchContactWithKey:searchText completion:^(NSError* error) {
+            [self.businessInterface getSearchedContactWithCompletionHandler:^(NSArray<contactWithStatus*>* result) {
+                for (contactWithStatus* contact in result) {
+                    [self.modelArray addObject:[[ContactModel alloc] initWithContact:contact AndIndex:contact.index]];
+                }
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.adapterForContacts performUpdatesAnimated:true completion:nil];
+                });
+            }];
+        }];
+    }
 }
 
 - (void) alertCantAccessContact {

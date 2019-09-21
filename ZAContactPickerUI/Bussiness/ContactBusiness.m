@@ -213,6 +213,7 @@
         for (NSNumber *indexNumber in self.selectedIndexArray) {
             if ([indexNumber integerValue] == index) {
                 [self.selectedIndexArray removeObject:indexNumber];
+                break;
             }
         }
         completion(nil);

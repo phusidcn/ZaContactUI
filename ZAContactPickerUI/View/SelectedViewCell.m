@@ -22,6 +22,8 @@
     self.iconLabel.frame = CGRectMake(0, 0, 53, 53);
     self.iconLabel.font = [UIFont systemFontOfSize:30 weight:UIFontWeightSemibold];
     self.iconLabel.textAlignment = NSTextAlignmentCenter;
+    self.iconLabel.textColor = [UIColor whiteColor];
     self.iconLabel.center = CGPointMake(self.contentView.bounds.size.width / 2, self.contentView.bounds.size.height / 2);
+    self.iconLabel.backgroundColor = [UIColor clearColor];
 }
 @end

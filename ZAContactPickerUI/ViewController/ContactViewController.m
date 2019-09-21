@@ -68,6 +68,7 @@
             });
         }
     }];
+    self.selectedView.contentInset = UIEdgeInsetsMake(0, 20, 0, 20);
     self.adapterForContacts.collectionView = self.collectionView;
     self.adapterForContacts.dataSource = self;
     
@@ -79,8 +80,11 @@
 }
 
 - (void) loadViews {
+    self.heightOfSelectedContacts = 0;
     self.collectionView.backgroundColor = [UIColor whiteColor];
     self.selectedView.backgroundColor = [UIColor whiteColor];
+    self.searchBar.placeholder = @"Type search contact...";
+    self.searchBar.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.selectedView];
     [self.view addSubview:self.searchBar];
     [self.view addSubview:self.collectionView];
@@ -89,9 +93,10 @@
     [super viewDidLayoutSubviews];
     CGRect navigationRect = self.navigationController.navigationBar.frame;
     CGFloat contentY = navigationRect.size.height + navigationRect.origin.y;
-    self.selectedView.frame = CGRectMake(0, contentY, self.view.bounds.size.width, 53);
-    self.searchBar.frame = CGRectMake(0, contentY + 53, self.view.bounds.size.width, 44);
-    self.collectionView.frame = CGRectMake(0, contentY + 53 + 44, self.view.bounds.size.width, self.view.bounds.size.height - contentY - 53 - 44);
+    
+    self.selectedView.frame = CGRectMake(0, contentY, self.view.bounds.size.width, self.heightOfSelectedContacts);
+    self.searchBar.frame = CGRectMake(0, contentY + self.heightOfSelectedContacts, self.view.bounds.size.width, 44);
+    self.collectionView.frame = CGRectMake(0, contentY + self.heightOfSelectedContacts + 44, self.view.bounds.size.width, self.view.bounds.size.height - contentY - self.heightOfSelectedContacts - 44);
 }
 
 #pragma mark : - IGListKit DataSource
@@ -120,6 +125,7 @@
     if (listAdapter == self.adapterForSelected) {
         if ([object isKindOfClass:[SelectedContactsModel class]]) {
             SelectedContactsController* controller = [SelectedContactsController new];
+            controller.delegate = self;
             return controller;
         }
     }
@@ -145,13 +151,10 @@
     [self.businessInterface selectOneContactAtIndex:contact.index completion:^(NSError* error) {
         [self.businessInterface getSelectedContactWithCompletionHandler:^(NSArray<contactWithStatus*>* result) {
             [self.selectedArray removeAllObjects];
-            /*
-            for (contactWithStatus* contact in result) {
-                [self.selectedArray addObject:[[SelectedContact alloc] initWithContact:contact AndIndex:contact.index]];
-            }*/
             [self.selectedArray addObject:[[SelectedContactsModel alloc] initWithContacts:result]];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.adapterForSelected performUpdatesAnimated:false completion:nil];
+                [self viewAnimated:result];
             });
         }];
     }];
@@ -161,28 +164,31 @@
     [self.businessInterface deselectContactAtIndex:contact.index completion:^(NSError* error) {
         [self.businessInterface getSelectedContactWithCompletionHandler:^(NSArray<contactWithStatus*>* result) {
             [self.selectedArray removeAllObjects];
-            /*
-            for (contactWithStatus* contact in result) {
-                [self.selectedArray addObject:[[SelectedContact alloc] initWithContact:contact AndIndex:contact.index]];
-            }*/
             [self.selectedArray addObject:[[SelectedContactsModel alloc] initWithContacts:result]];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.adapterForSelected performUpdatesAnimated:false completion:nil];
+                [self viewAnimated:result];
             });
         }];
     }];
 }
 
-- (void) collapseSelectedBar {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        //self.selectedView.frame.size.height = 0.0;
-    });
+#pragma mark : - Selected Contact Delegate
+- (void) actionForSelectedContact:(contactWithStatus *)contact {
+    
 }
 
-- (void) showSelectedBar {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        //self.selectedView.frame.size.height = 53;
-    });
+- (void) viewAnimated:(NSArray<contactWithStatus*>*) array {
+    if (array.count == 0) {
+        self.heightOfSelectedContacts = 0;
+    } else {
+        self.heightOfSelectedContacts = 60;
+    }
+    [UIView animateWithDuration:0.5 animations:^{
+        self.selectedView.frame = CGRectMake(0, 0, self.view.bounds.size.width, self.heightOfSelectedContacts);
+        self.searchBar.frame = CGRectMake(0, self.heightOfSelectedContacts, self.view.bounds.size.width, 44);
+        self.collectionView.frame = CGRectMake(0, self.heightOfSelectedContacts + 44, self.view.bounds.size.width, self.view.bounds.size.height - self.heightOfSelectedContacts - 44);
+    }];
 }
 #pragma mark : - Search Delegate
 - (void) searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {

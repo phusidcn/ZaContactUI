@@ -21,11 +21,8 @@
 		C2FE7957232B851A0016834A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C2FE7955232B851A0016834A /* LaunchScreen.storyboard */; };
 		C2FE795A232B851A0016834A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C2FE7959232B851A0016834A /* main.m */; };
 		C2FE7964232B851A0016834A /* ZAContactPickerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = C2FE7963232B851A0016834A /* ZAContactPickerUITests.m */; };
-		C2FE7973232B87F50016834A /* SelectedContactSectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2FE7972232B87F50016834A /* SelectedContactSectionController.m */; };
 		C2FE7979232B882C0016834A /* ContactSectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2FE7978232B882C0016834A /* ContactSectionController.m */; };
 		C2FE797D232B8E0D0016834A /* SelectedViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C2FE797C232B8E0D0016834A /* SelectedViewCell.m */; };
-		C2FE7980232B8E1B0016834A /* SearchViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C2FE797F232B8E1B0016834A /* SearchViewCell.m */; };
-		C2FE7986232B90DE0016834A /* SelectedContact.m in Sources */ = {isa = PBXBuildFile; fileRef = C2FE7985232B90DE0016834A /* SelectedContact.m */; };
 		C2FE7989232B90EE0016834A /* SearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = C2FE7988232B90EE0016834A /* SearchBar.m */; };
 		C2FE7992232BA25F0016834A /* ABAddressBookGetter.m in Sources */ = {isa = PBXBuildFile; fileRef = C2FE7990232BA25F0016834A /* ABAddressBookGetter.m */; };
 		C2FE7995232BA27C0016834A /* CNContactGetter.m in Sources */ = {isa = PBXBuildFile; fileRef = C2FE7993232BA27C0016834A /* CNContactGetter.m */; };
@@ -81,16 +78,10 @@
 		C2FE795F232B851A0016834A /* ZAContactPickerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZAContactPickerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2FE7963232B851A0016834A /* ZAContactPickerUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZAContactPickerUITests.m; sourceTree = "<group>"; };
 		C2FE7965232B851A0016834A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C2FE7971232B87F50016834A /* SelectedContactSectionController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectedContactSectionController.h; sourceTree = "<group>"; };
-		C2FE7972232B87F50016834A /* SelectedContactSectionController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectedContactSectionController.m; sourceTree = "<group>"; };
 		C2FE7977232B882C0016834A /* ContactSectionController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContactSectionController.h; sourceTree = "<group>"; };
 		C2FE7978232B882C0016834A /* ContactSectionController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContactSectionController.m; sourceTree = "<group>"; };
 		C2FE797B232B8E0D0016834A /* SelectedViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectedViewCell.h; sourceTree = "<group>"; };
 		C2FE797C232B8E0D0016834A /* SelectedViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectedViewCell.m; sourceTree = "<group>"; };
-		C2FE797E232B8E1B0016834A /* SearchViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchViewCell.h; sourceTree = "<group>"; };
-		C2FE797F232B8E1B0016834A /* SearchViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchViewCell.m; sourceTree = "<group>"; };
-		C2FE7984232B90DE0016834A /* SelectedContact.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectedContact.h; sourceTree = "<group>"; };
-		C2FE7985232B90DE0016834A /* SelectedContact.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectedContact.m; sourceTree = "<group>"; };
 		C2FE7987232B90EE0016834A /* SearchBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchBar.h; sourceTree = "<group>"; };
 		C2FE7988232B90EE0016834A /* SearchBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchBar.m; sourceTree = "<group>"; };
 		C2FE7990232BA25F0016834A /* ABAddressBookGetter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABAddressBookGetter.m; sourceTree = "<group>"; };
@@ -210,8 +201,6 @@
 			children = (
 				C24810F72334ED5A0067E10A /* SelectedContactsController.h */,
 				C24810F82334ED5A0067E10A /* SelectedContactsController.m */,
-				C2FE7971232B87F50016834A /* SelectedContactSectionController.h */,
-				C2FE7972232B87F50016834A /* SelectedContactSectionController.m */,
 				531A7C4B232E6D270016D4F5 /* SectionLabelController.h */,
 				531A7C4C232E6D270016D4F5 /* SectionLabelController.m */,
 				C2FE7977232B882C0016834A /* ContactSectionController.h */,
@@ -225,8 +214,6 @@
 			children = (
 				C24810F42334EA900067E10A /* SelectedContactsModel.h */,
 				C24810F52334EA900067E10A /* SelectedContactsModel.m */,
-				C2FE7984232B90DE0016834A /* SelectedContact.h */,
-				C2FE7985232B90DE0016834A /* SelectedContact.m */,
 				C2FE7987232B90EE0016834A /* SearchBar.h */,
 				C2FE7988232B90EE0016834A /* SearchBar.m */,
 				53BAF738232D57AB00BAC6DA /* SectionLabelModel.h */,
@@ -242,8 +229,6 @@
 			children = (
 				C2FE797B232B8E0D0016834A /* SelectedViewCell.h */,
 				C2FE797C232B8E0D0016834A /* SelectedViewCell.m */,
-				C2FE797E232B8E1B0016834A /* SearchViewCell.h */,
-				C2FE797F232B8E1B0016834A /* SearchViewCell.m */,
 				531A7C48232E67CF0016D4F5 /* SectionLabelViewCell.h */,
 				531A7C49232E67CF0016D4F5 /* SectionLabelViewCell.m */,
 				C2FE79AF232BA7470016834A /* ContactViewCell.h */,
@@ -473,7 +458,6 @@
 				C24810F62334EA900067E10A /* SelectedContactsModel.m in Sources */,
 				C2FE79A0232BA2A40016834A /* ContactUtility.m in Sources */,
 				C2FE79B1232BA7470016834A /* ContactViewCell.m in Sources */,
-				C2FE7980232B8E1B0016834A /* SearchViewCell.m in Sources */,
 				C2FE79AD232BA2DF0016834A /* ContactInstance.m in Sources */,
 				C2FE79A2232BA2A40016834A /* ContactWithStatus.m in Sources */,
 				C2FE797D232B8E0D0016834A /* SelectedViewCell.m in Sources */,
@@ -481,8 +465,6 @@
 				C2FE7992232BA25F0016834A /* ABAddressBookGetter.m in Sources */,
 				C2FE794C232B85190016834A /* AppDelegate.m in Sources */,
 				531A7C4A232E67CF0016D4F5 /* SectionLabelViewCell.m in Sources */,
-				C2FE7973232B87F50016834A /* SelectedContactSectionController.m in Sources */,
-				C2FE7986232B90DE0016834A /* SelectedContact.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,9 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <IGListKit.h>
 #import <Foundation/Foundation.h>
-#import "../Model/SelectedContact.h"
 #import "../Model/SearchBar.h"
-#import "../SectionController/SelectedContactSectionController.h"
 #import "../SectionController/SelectedContactsController.h"
 #import "../SectionController/ContactSectionController.h"
 #import "../SectionController/SectionLabelController.h"
@@ -20,11 +18,10 @@
 #import "../Bussiness/ContactUtility.h"
 #import "../Model/ContactModel.h"
 #import "../Model/SectionLabelModel.h"
-#import "../Model/SelectedContact.h"
 #import "../Model/SearchBar.h"
 #import "../Model/SelectedContactsModel.h"
 
-@interface ContactViewController : UIViewController <IGListAdapterDataSource, IGListAdapterDelegate, UISearchBarDelegate, ContactDelegate>
+@interface ContactViewController : UIViewController <IGListAdapterDataSource, IGListAdapterDelegate, UISearchBarDelegate, ContactDelegate, SelectedContactDelegate>
 
 
 @end

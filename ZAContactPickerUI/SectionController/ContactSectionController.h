@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import <IGListKit.h>
 #import "../View/ContactViewCell.h"
-#import "../View/TableView.h"
 #import "../Model/ContactModel.h"
 #import "../Bussiness/ContactUtility.h"
 

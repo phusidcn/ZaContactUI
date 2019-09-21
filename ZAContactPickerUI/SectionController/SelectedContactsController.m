@@ -11,16 +11,9 @@
 @implementation SelectedContactsController
 - (instancetype) init {
     self = [super init];
+    self.utility = [[contactUtility alloc] init];
+    self.inset = UIEdgeInsetsMake(5, 5, 5, 5);
     return self;
-}
-
-+ (contactUtility*) utility {
-    __block contactUtility* utility;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        utility = [[contactUtility alloc] init];
-    });
-    return utility;
 }
 
 - (NSInteger) numberOfItems {
@@ -33,10 +26,12 @@
 
 - (UICollectionViewCell*) cellForItemAtIndex:(NSInteger)index {
     SelectedViewCell* cell = [self.collectionContext dequeueReusableCellOfClass:[SelectedViewCell class] forSectionController:self atIndex:index];
-    cell.iconLabel.text = [[SelectedContactsController utility] getAvatarOf: [self.contactsModel.contacts objectAtIndex:index]];
-    cell.contentView.backgroundColor = [[SelectedContactsController utility] getColorOf:[self.contactsModel.contacts objectAtIndex:index]];
+    contactWithStatus* contact = [self.contactsModel.contacts objectAtIndex:index];
+    cell.iconLabel.text = [self.utility getAvatarOf:contact];
+    cell.contentView.backgroundColor = [self.utility getColorOf:contact];
     cell.clipsToBounds = true;
-    cell.layer.cornerRadius = 53 / 2;
+    cell.layer.cornerRadius = cell.contentView.bounds.size.height / 2;
+    [cell layoutSubviews];
     return cell;
 }
 
@@ -45,6 +40,6 @@
 }
 
 - (void) didSelectItemAtIndex:(NSInteger)index {
-    
+    [self.delegate actionForSelectedContact:[self.contactsModel.contacts objectAtIndex:index]];
 }
 @end

@@ -13,9 +13,16 @@
 #import "../Bussiness/ContactUtility.h"
 
 NS_ASSUME_NONNULL_BEGIN
+@protocol SelectedContactDelegate <NSObject>
+
+- (void) actionForSelectedContact:(contactWithStatus*) contact;
+
+@end
 
 @interface SelectedContactsController : IGListSectionController
+@property id<SelectedContactDelegate> delegate;
 @property SelectedContactsModel* contactsModel;
+@property contactUtility* utility;
 @end
 
 NS_ASSUME_NONNULL_END
